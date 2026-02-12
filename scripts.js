@@ -135,7 +135,7 @@ function closeModal() {
 })();
 
 // =============================
-// Bananas de Pijama: aparece no load
+// B1/B2: aparece no load
 // =============================
 (function setupBananaIntro(){
   window.addEventListener("load", () => {
@@ -161,12 +161,12 @@ function showBananaIntro(){
 
   const img = document.createElement("img");
   img.src = "assets/banana-pajamas.gif";
-  img.alt = "Bananas de pijama";
+  img.alt = "B1/B2";
   img.className = "banana-intro-img";
   img.loading = "eager";
   wrap.appendChild(img);
 
-  // openModal("🍌🛌 Bananas de Pijama", wrap);
+  // openModal("🍌🛌 B1/B2", wrap);
   openModal("🎉 Você está convidado!! 🎉", wrap);
 
   let cleaned = false;
@@ -279,7 +279,7 @@ function coffeeEgg(fromTyping=false){
   const wrap = document.createElement("div");
   wrap.innerHTML = `
     <p style="margin:0 0 10px;">
-      ☕ <b>CAFÉ DETECTADO</b> ${fromTyping ? "(digitado no teclado 😈)" : "(clicado)"}
+      ☕ <b>CAFÉ DETECTADO</b> ${fromTyping ? "(digitado no teclado 😈)" : ""}
       <br/>Sem café, sem química. Sem química, sem mestrado. Logo: <b>CAFÉ</b>.
     </p>
   `;
@@ -305,7 +305,7 @@ function cardsEgg(fromTyping=false){
 
   wrap.innerHTML = `
     <p style="margin:0 0 10px;">
-      🃏 <b>O BARALHO FALOU</b> ${fromTyping ? "(digitado)" : "(clicado)"}
+      🃏 <b>O BARALHO FALOU</b> ${fromTyping ? "(digitado)" : ""}
       <br/>Carta tirada: <b>${card}</b>
       <br/><i>Interpretação:</i> se for Ás, você vai apresentar lindo. Se não for, também vai. 🤘
     </p>
@@ -319,12 +319,12 @@ function bananaEgg(fromTyping=false){
   const wrap = document.createElement("div");
   wrap.innerHTML = `
     <p style="margin:0 0 10px;">
-      🍌🛌 <b>BANANAS DE PIJAMA APROVAM ESTA DEFESA</b> ${fromTyping ? "(digitado)" : "(clicado)"}
+      🍌🛌 <b>©️ B1/B2</b> ${fromTyping ? "(digitado)" : ""}
       <br/>Se você leu isso, você já está oficialmente convidado(a).
     </p>
   `;
 
-  openModal("🍌 Pijama Protocol", wrap);
+  openModal("vOcÊ é EsPeCiAl!", wrap);
   zapScreen(3);
 }
 
@@ -332,7 +332,7 @@ function timeEgg(fromTyping=false){
   const wrap = document.createElement("div");
   wrap.innerHTML = `
     <p style="margin:0 0 10px;">
-      ⏰ <b>ATENÇÃO:</b> O HORÁRIO É IMPORTANTE ${fromTyping ? "(digitado)" : "(clicado)"}!
+      ⏰ <b>ATENÇÃO:</b> O HORÁRIO É IMPORTANTE ${fromTyping ? "(digitado)" : ""}!
       <br/>Se você chegar atrasado(a), uma caveira faz um <i>power chord</i> de desaprovação.
     </p>
     <ul style="margin:0 0 10px;">
