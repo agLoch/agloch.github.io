@@ -23,6 +23,138 @@ function closeModal() {
 }
 
 // =============================
+// Hover nos memes: vira cartas
+// =============================
+(function setupMemeHoverSwap(){
+  const CARD_SRC = "assets/cards.gif";
+  const imgs = document.querySelectorAll(".meme-row img");
+  if (!imgs.length) return;
+
+  imgs.forEach((img) => {
+    img.addEventListener("mouseenter", () => {
+      if (!img.dataset.originalSrc) img.dataset.originalSrc = img.getAttribute("src") || "";
+      img.setAttribute("src", CARD_SRC);
+    });
+
+    img.addEventListener("mouseleave", () => {
+      if (img.dataset.originalSrc) img.setAttribute("src", img.dataset.originalSrc);
+    });
+  });
+})();
+
+// =============================
+// Unicórnio esqueleto no fundo (múltiplas cópias)
+// =============================
+(function setupUnicornBackground(){
+  const container = document.querySelector("#unicornBg");
+  if (!container) return;
+
+  const rand = (min, max) => min + Math.random() * (max - min);
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+  const count = 9;
+  const baseSrc = "assets/unicorn-skeleton.png";
+
+  for (let i = 0; i < count; i++) {
+    const img = document.createElement("img");
+    img.src = baseSrc;
+    img.alt = "";
+    img.decoding = "async";
+    img.loading = "eager";
+    img.className = "unicorn-sprite";
+
+    const y = rand(6, 92);
+    const x = rand(-12, 92);
+
+    const size = rand(70, 190);
+    const duration = rand(10, 28);
+    const delay = -rand(0, duration);
+
+    const range = rand(18, 85) * (Math.random() < 0.5 ? -1 : 1);
+    const opacity = rand(0.08, 0.20);
+
+    const rot1 = pick(["-6deg", "-4deg", "-2deg", "-1deg"]);
+    const rot2 = pick(["1deg", "2deg", "4deg", "6deg"]);
+
+    img.style.setProperty("--y", `${y}vh`);
+    img.style.setProperty("--x", `${x}vw`);
+    img.style.setProperty("--size", `${size}px`);
+    img.style.setProperty("--dur", `${duration}s`);
+    img.style.setProperty("--delay", `${delay}s`);
+    img.style.setProperty("--range", `${range}vw`);
+    img.style.setProperty("--op", opacity.toFixed(3));
+    img.style.setProperty("--rot1", rot1);
+    img.style.setProperty("--rot2", rot2);
+
+    container.appendChild(img);
+  }
+})();
+
+// =============================
+// Bananas de Pijama: aparece no load
+// =============================
+(function setupBananaIntro(){
+  window.addEventListener("load", () => {
+    showBananaIntro();
+  }, { once: true });
+})();
+
+function showBananaIntro(){
+  const modal = qs("#modal");
+  if (!modal) return;
+
+  modal.classList.add("banana-intro");
+
+  const wrap = document.createElement("div");
+  wrap.className = "banana-intro-wrap";
+  wrap.innerHTML = `
+    <p style="margin:0 0 10px;">
+      ☠️💀 🎉 <b>Chegou a hora de prestigiar o resultado dos meus 2 anos de tortura! 🎉 💀☠️</b>
+      <br>
+      <br/>Clique/toca pra continuar.
+    </p>
+  `;
+
+  const img = document.createElement("img");
+  img.src = "assets/banana-pajamas.gif";
+  img.alt = "Bananas de pijama";
+  img.className = "banana-intro-img";
+  img.loading = "eager";
+  wrap.appendChild(img);
+
+  // openModal("🍌🛌 Bananas de Pijama", wrap);
+  openModal("🎉 Você está convidado!! 🎉", wrap);
+
+  let cleaned = false;
+  const cleanup = () => {
+    if (cleaned) return;
+    cleaned = true;
+    modal.classList.remove("banana-intro");
+    modal.removeEventListener("click", onClickCapture, true);
+    document.removeEventListener("keydown", onKeydown);
+  };
+
+  const closeIntro = () => {
+    cleanup();
+    closeModal();
+  };
+
+  const onClickCapture = () => {
+    if (!modal.classList.contains("open")) return;
+    closeIntro();
+  };
+
+  const onKeydown = (e) => {
+    if (!modal.classList.contains("open")) return;
+    if (e.key === "Escape" || e.key === "Enter" || e.key === " ") closeIntro();
+  };
+
+  // Qualquer clique/tap no modal fecha (inclusive no GIF)
+  modal.addEventListener("click", onClickCapture, true);
+  document.addEventListener("keydown", onKeydown);
+}
+
+// =============================
 // Hover: Gustavo -> Augusto
 // =============================
 (function setupNameSwap(){
@@ -104,7 +236,7 @@ function coffeeEgg(fromTyping=false){
   wrap.innerHTML = `
     <p style="margin:0 0 10px;">
       ☕ <b>CAFÉ DETECTADO</b> ${fromTyping ? "(digitado no teclado 😈)" : "(clicado)"}
-      <br/>Sem café, sem compilação. Sem compilação, sem mestrado. Logo: <b>CAFÉ</b>.
+      <br/>Sem café, sem química. Sem química, sem mestrado. Logo: <b>CAFÉ</b>.
     </p>
   `;
 
@@ -133,9 +265,6 @@ function cardsEgg(fromTyping=false){
       <br/>Carta tirada: <b>${card}</b>
       <br/><i>Interpretação:</i> se for Ás, você vai apresentar lindo. Se não for, também vai. 🤘
     </p>
-    <p style="margin:0 0 10px;">
-      Dica: procure um gif tosco e coloque em <code>assets/cards.gif</code>.
-    </p>
   `;
 
   openModal("🃏 Sorte do Rock", wrap);
@@ -148,9 +277,6 @@ function bananaEgg(fromTyping=false){
     <p style="margin:0 0 10px;">
       🍌🛌 <b>BANANAS DE PIJAMA APROVAM ESTA DEFESA</b> ${fromTyping ? "(digitado)" : "(clicado)"}
       <br/>Se você leu isso, você já está oficialmente convidado(a).
-    </p>
-    <p style="margin:0 0 10px;">
-      Substitua <code>assets/banana-pajamas.gif</code> quando achar a imagem perfeita.
     </p>
   `;
 

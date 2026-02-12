@@ -8,6 +8,9 @@
 </head>
 
 <body>
+  <!-- Unicórnios esqueleto voando no fundo -->
+  <div class="unicorn-bg" id="unicornBg" aria-hidden="true"></div>
+
   <!-- Overlay de raios -->
   <div class="lightning-overlay" aria-hidden="true">
     <div class="bolt b1"></div>
@@ -52,17 +55,19 @@
       <div class="details">
         <div class="detail">
           <div class="label">📅 Data</div>
-          <div class="value" contenteditable="true" spellcheck="false">DD/MM/AAAA</div>
+          <div class="value" contenteditable="false" spellcheck="false">25/02/2026</div>
         </div>
         <div class="detail">
           <div class="label">⏰ Horário (MUITO importante)</div>
-          <div class="value time-very-important" contenteditable="true" spellcheck="false">
-            HH:MM (chegue 5min antes ou a caveira te julga)
+          <div class="value time-very-important" contenteditable="false" spellcheck="false">
+            13:30 (chegue 5min antes ou a caveira te julga)
+
+            <span class="hint">(BRT GMT-3, porque horário de gringo é irrelevante)</span>
           </div>
         </div>
         <div class="detail">
           <div class="label">📍 Local</div>
-          <div class="value" contenteditable="true" spellcheck="false">Sala X / Departamento Y</div>
+          <div class="value" contenteditable="false" spellcheck="false">Sala X / Departamento Y</div>
         </div>
         <div class="detail">
           <div class="label">💻 Teams</div>
@@ -94,35 +99,6 @@
 
       <!-- placeholders de memes que você troca depois -->
       <div class="extras">
-        <div class="extra-card">
-          <div class="extra-title">🦄💀 Unicórnio Esqueleto (placeholder)</div>
-          <img class="placeholder-img" src="assets/unicorn-skeleton.png" alt="Unicórnio esqueleto (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/unicorn-skeleton.png)';" />
-          <p class="extra-hint">Troque por uma imagem bem cursed.</p>
-        </div>
-
-        <div class="extra-card">
-          <div class="extra-title">⚡ GIF de raio (placeholder)</div>
-          <img class="placeholder-img" src="assets/lightning.gif" alt="Raio (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/lightning.gif)';" />
-          <p class="extra-hint">Pode ser qualquer gif tosco estilo 2003.</p>
-        </div>
-
-        <div class="extra-card">
-          <div class="extra-title">🍌🛌 Bananas de Pijama (placeholder)</div>
-          <img class="placeholder-img" src="assets/banana-pajamas.gif" alt="Bananas de pijama (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/banana-pajamas.gif)';" />
-          <p class="extra-hint">Sim, isso é um easter egg. Sim, é inevitável.</p>
-        </div>
-
-        <div class="extra-card">
-          <div class="extra-title">☕ Café (placeholder)</div>
-          <img class="placeholder-img" src="assets/coffee.gif" alt="Café (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/coffee.gif)';" />
-          <p class="extra-hint">Clique no ☕ em algum lugar. (ou digite “cafe”)</p>
-        </div>
-
-        <div class="extra-card">
-          <div class="extra-title">🃏 Baralho (placeholder)</div>
-          <img class="placeholder-img" src="assets/cards.gif" alt="Cartas (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/cards.gif)';" />
-          <p class="extra-hint">Se achar o Ás escondido, você ganha respeito de rock.</p>
-        </div>
       </div>
 
       <!-- Botões escondidos/caóticos -->
@@ -154,6 +130,11 @@
     </div>
   </main>
 
-  <script src="script.js"></script>
+  <aside class="coffee-side" aria-label="Aviso de café">
+    <img class="coffee-side-gif" src="assets/coffee.gif" alt="Café" />
+    <div class="coffee-side-text">Vai ter café (e talvez focaccia)</div>
+  </aside>
+
+  <script src="scripts.js"></script>
 </body>
 </html>

@@ -30,6 +30,36 @@ body{
   overflow-x: hidden;
 }
 
+/* ======== UNICÓRNIO ESQUELETO (FUNDO) ======== */
+.unicorn-bg{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  opacity: 1;
+}
+
+.unicorn-sprite{
+  position: absolute;
+  border-radius: 50%;
+  left: var(--x, 10vw);
+  top: var(--y, 40vh);
+  width: var(--size, 120px);
+  height: auto;
+  opacity: var(--op, 0.14);
+  filter: grayscale(0) contrast(1.15) drop-shadow(0 0 12px rgba(189,52,254,0.12));
+  mix-blend-mode: screen;
+  transform: translate3d(0,0,0) rotate(var(--rot1, -2deg));
+  will-change: transform;
+  animation: unicornDrift var(--dur, 18s) ease-in-out var(--delay, 0s) infinite alternate;
+}
+
+@keyframes unicornDrift{
+  from{ transform: translate3d(0,0,0) rotate(var(--rot1, -2deg)); }
+  to{ transform: translate3d(var(--range, 40vw),0,0) rotate(var(--rot2, 2deg)); }
+}
+
 /* Scanlines */
 .scanlines{
   position: fixed;
@@ -84,6 +114,39 @@ marquee{
   border-radius: 12px;
   padding: 18px 18px 16px;
   position: relative;
+}
+
+/* ======== CAFÉ LATERAL ======== */
+.coffee-side{
+  position: fixed;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+  width: min(220px, 42vw);
+  padding: 10px;
+  background: rgba(0,0,0,0.65);
+  border: 3px ridge rgba(255,255,255,0.35);
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(73,199,255,0.12), 0 0 34px rgba(189,52,254,0.10);
+  text-align: center;
+}
+
+.coffee-side-gif{
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.05);
+  border: 2px inset rgba(255,255,255,0.15);
+  border-radius: 10px;
+}
+
+.coffee-side-text{
+  margin-top: 8px;
+  font-weight: 900;
+  font-size: 13px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0,0,0,0.9);
 }
 
 /* selos */
@@ -315,6 +378,29 @@ a:hover{ color: var(--neon3); }
   box-shadow: 0 0 40px rgba(189,52,254,0.18);
   position: relative;
 }
+
+/* Bananas de Pijama: modal de abertura */
+.modal.banana-intro .modal-inner{
+  animation: bananaPop 260ms ease-out;
+}
+
+.banana-intro-wrap{
+  text-align: center;
+}
+
+.banana-intro-img{
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 2px ridge rgba(255,255,255,0.25);
+  cursor: pointer;
+}
+
+@keyframes bananaPop{
+  from{ transform: scale(0.86); opacity: 0; }
+  to{ transform: scale(1); opacity: 1; }
+}
 .modal-close{
   position: absolute;
   top: 10px;
@@ -344,30 +430,30 @@ a:hover{ color: var(--neon3); }
 .bolt{
   position: absolute;
   top: -20%;
-  width: 2px;
-  height: 140%;
-  background: linear-gradient(to bottom,
-    rgba(255,255,255,0),
-    rgba(255,255,255,0.8),
-    rgba(73,199,255,0.45),
-    rgba(255,255,255,0.9),
-    rgba(255,255,255,0)
-  );
-  transform: skewX(-15deg);
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.35));
-  animation: boltFlash 4.2s infinite;
+  width: 260px;
+  height: 150%;
+  background-image: url("assets/lightning.gif");
+  /* background-repeat: no-repeat; */
+  /* background-size: contain; */
+  background-size: cover;
+  background-position: center top;
+  transform-origin: top center;
+  filter: drop-shadow(0 0 12px rgba(255,255,255,0.35));
+  mix-blend-mode: screen;
+  animation: boltStrike 4.2s infinite;
   opacity: 0;
 }
-.b1{ left: 12%; animation-delay: 0.4s; }
-.b2{ left: 51%; animation-delay: 2.0s; }
-.b3{ left: 82%; animation-delay: 3.1s; }
 
-@keyframes boltFlash{
-  0%, 84%, 100% { opacity: 0; }
+.b1{ left: 12%; animation-delay: 0.4s; transform: translateX(-50%) rotate(-8deg) scaleX(0.95); }
+.b2{ left: 51%; animation-delay: 2.0s; transform: translateX(-50%) rotate(6deg) scaleX(1.02); }
+.b3{ left: 82%; animation-delay: 3.1s; transform: translateX(-50%) rotate(-2deg) scaleX(0.98); }
+
+@keyframes boltStrike{
+  0%, 82%, 100% { opacity: 0; filter: drop-shadow(0 0 0 rgba(255,255,255,0.0)); }
+  83% { opacity: 1; filter: drop-shadow(0 0 22px rgba(255,255,255,0.35)); }
+  84% { opacity: 0.12; }
   85% { opacity: 1; }
-  86% { opacity: 0.1; }
-  87% { opacity: 1; }
-  88% { opacity: 0; }
+  86% { opacity: 0; }
 }
 
 /* “sparkles” */
@@ -401,4 +487,26 @@ a:hover{ color: var(--neon3); }
   .meme-row{ grid-template-columns: 1fr; }
   .meme img{ height: 240px; }
   .extras{ grid-template-columns: 1fr; }
+
+  .coffee-side{
+    top: auto;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    transform: none;
+    width: auto;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .coffee-side-gif{
+    height: 88px;
+  }
+
+  .coffee-side-text{
+    margin-top: 0;
+  }
 }
