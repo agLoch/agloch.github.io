@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🤘 Defesa de Mestrado do Gustavo 🤘</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Overlay de raios -->
+  <div class="lightning-overlay" aria-hidden="true">
+    <div class="bolt b1"></div>
+    <div class="bolt b2"></div>
+    <div class="bolt b3"></div>
+  </div>
+
+  <!-- “Scanlines” anos 2000 -->
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Topbar caótica -->
+  <header class="topbar">
+    <marquee behavior="alternate" scrollamount="12">
+      ⚡🤘 BEM-VINDO(A) AO CONVITE MAIS ROCKEIRO DA UFPR (ou quase) 🤘⚡
+      &nbsp;&nbsp;|&nbsp;&nbsp; NÃO ESQUEÇA: O HORÁRIO É SAGRADO ⏰
+      &nbsp;&nbsp;|&nbsp;&nbsp; CAFÉ = COMBUSTÍVEL ☕
+      &nbsp;&nbsp;|&nbsp;&nbsp; BANANAS DE PIJAMA VIGIAM VOCÊ 🍌🛌
+      &nbsp;&nbsp;|&nbsp;&nbsp; CARTAS MARCAM O DESTINO 🃏
+    </marquee>
+  </header>
+
+  <main class="stage">
+    <section class="invite-card" role="region" aria-label="Convite para a defesa">
+      <div class="corner-stamps" aria-hidden="true">
+        <span class="stamp blink">🔥 HOT 🔥</span>
+        <span class="stamp">2000 vibes</span>
+        <span class="stamp">ROCK MODE</span>
+      </div>
+
+      <h1 class="headline">
+        <span class="defesa">Defesa de Mestrado do</span>
+        <!-- Hover: Gustavo -> Augusto -->
+        <span
+          id="nameSwap"
+          class="name-swap"
+          data-primary="Gustavo"
+          data-alt="Augusto"
+          title="passa o mouse aí 😈"
+        >Gustavo</span>
+      </h1>
+
+      <div class="details">
+        <div class="detail">
+          <div class="label">📅 Data</div>
+          <div class="value" contenteditable="true" spellcheck="false">DD/MM/AAAA</div>
+        </div>
+        <div class="detail">
+          <div class="label">⏰ Horário (MUITO importante)</div>
+          <div class="value time-very-important" contenteditable="true" spellcheck="false">
+            HH:MM (chegue 5min antes ou a caveira te julga)
+          </div>
+        </div>
+        <div class="detail">
+          <div class="label">📍 Local</div>
+          <div class="value" contenteditable="true" spellcheck="false">Sala X / Departamento Y</div>
+        </div>
+        <div class="detail">
+          <div class="label">💻 Teams</div>
+          <div class="value">
+            <a
+              id="teamsLink"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="cole o link do Teams no script.js (ou edite aqui)"
+            >
+              Clique aqui pra entrar no Teams (ou tente invocar no grito)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="meme-row">
+        <figure class="meme">
+          <img src="assets/skull-rock-meme-1.jpeg" alt="Meme rock caveira 1" />
+          <figcaption>“eh do rock, tem o meu respeito!!”</figcaption>
+        </figure>
+
+        <figure class="meme">
+          <img src="assets/skull-rock-meme-2.jpeg" alt="Meme rock caveira 2" />
+          <figcaption>Se olhar por tempo demais, você ganha +1 em riffs.</figcaption>
+        </figure>
+      </div>
+
+      <!-- placeholders de memes que você troca depois -->
+      <div class="extras">
+        <div class="extra-card">
+          <div class="extra-title">🦄💀 Unicórnio Esqueleto (placeholder)</div>
+          <img class="placeholder-img" src="assets/unicorn-skeleton.png" alt="Unicórnio esqueleto (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/unicorn-skeleton.png)';" />
+          <p class="extra-hint">Troque por uma imagem bem cursed.</p>
+        </div>
+
+        <div class="extra-card">
+          <div class="extra-title">⚡ GIF de raio (placeholder)</div>
+          <img class="placeholder-img" src="assets/lightning.gif" alt="Raio (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/lightning.gif)';" />
+          <p class="extra-hint">Pode ser qualquer gif tosco estilo 2003.</p>
+        </div>
+
+        <div class="extra-card">
+          <div class="extra-title">🍌🛌 Bananas de Pijama (placeholder)</div>
+          <img class="placeholder-img" src="assets/banana-pajamas.gif" alt="Bananas de pijama (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/banana-pajamas.gif)';" />
+          <p class="extra-hint">Sim, isso é um easter egg. Sim, é inevitável.</p>
+        </div>
+
+        <div class="extra-card">
+          <div class="extra-title">☕ Café (placeholder)</div>
+          <img class="placeholder-img" src="assets/coffee.gif" alt="Café (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/coffee.gif)';" />
+          <p class="extra-hint">Clique no ☕ em algum lugar. (ou digite “cafe”)</p>
+        </div>
+
+        <div class="extra-card">
+          <div class="extra-title">🃏 Baralho (placeholder)</div>
+          <img class="placeholder-img" src="assets/cards.gif" alt="Cartas (placeholder)" onerror="this.classList.add('broken'); this.alt='(adicione assets/cards.gif)';" />
+          <p class="extra-hint">Se achar o Ás escondido, você ganha respeito de rock.</p>
+        </div>
+      </div>
+
+      <!-- Botões escondidos/caóticos -->
+      <div class="button-row">
+        <button class="btn" id="btnCoffee" title="cafééééé ☕">☕ Café</button>
+        <button class="btn" id="btnCards" title="embaralhar o destino 🃏">🃏 Cartas</button>
+        <button class="btn" id="btnBanana" title="não pergunte 🍌">🍌 Pijama</button>
+        <button class="btn danger" id="btnTime" title="O HORÁRIO É IMPORTANTE">⏰ RESPEITA O HORÁRIO</button>
+      </div>
+
+      <p class="footer-note">
+        <span class="blink">⚠️</span> Dica: digite no teclado <code>cafe</code>, <code>as</code>, <code>banana</code> ou <code>hora</code>.
+        <span class="blink">⚠️</span>
+      </p>
+    </section>
+
+    <!-- Modal de vídeo (asset mp4 anexado) -->
+    <div class="modal" id="modal">
+      <div class="modal-inner" role="dialog" aria-modal="true" aria-label="Easter egg">
+        <button class="modal-close" id="modalClose" aria-label="Fechar">X</button>
+        <h2 id="modalTitle">Easter Egg</h2>
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+    <!-- “Sparkles”/estrelas old school -->
+    <div class="sparkles" aria-hidden="true">
+      <span>*</span><span>*</span><span>*</span><span>*</span><span>*</span><span>*</span>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
