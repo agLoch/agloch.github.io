@@ -23,6 +23,50 @@ function closeModal() {
 }
 
 // =============================
+// YouTube mini: música de fundo (best-effort)
+// =============================
+(function setupYouTubeMini(){
+  const frame = document.querySelector("#ytMiniFrame");
+  if (!frame) return;
+
+  const videoId = frame.dataset.videoId;
+  if (!videoId) return;
+
+  const base = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}`;
+  const isFile = window.location.protocol === "file:";
+
+  const buildParams = (mute) => {
+    const p = new URLSearchParams({
+      autoplay: "1",
+      playsinline: "1",
+      rel: "0",
+      modestbranding: "1",
+      loop: "1",
+      playlist: videoId,
+      mute: mute ? "1" : "0",
+    });
+    // Ajuda alguns ambientes/hosts a não acusarem “config error”
+    if (!isFile && window.location.origin) p.set("origin", window.location.origin);
+    return p;
+  };
+
+  // Autoplay com som costuma ser bloqueado: começa mutado.
+  frame.src = `${base}?${buildParams(true).toString()}`;
+
+  // Após a primeira interação do usuário, tenta re-carregar sem mute.
+  const tryEnableSound = () => {
+    frame.src = `${base}?${buildParams(false).toString()}`;
+  };
+
+  const onFirstPointer = () => {
+    tryEnableSound();
+    document.removeEventListener("pointerdown", onFirstPointer);
+  };
+
+  document.addEventListener("pointerdown", onFirstPointer);
+})();
+
+// =============================
 // Hover nos memes: vira cartas
 // =============================
 (function setupMemeHoverSwap(){
