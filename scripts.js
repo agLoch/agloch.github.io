@@ -29,10 +29,31 @@ function closeModal() {
   const frame = document.querySelector("#ytMiniFrame");
   if (!frame) return;
 
-  const videoId = frame.dataset.videoId;
-  if (!videoId) return;
+  const parsePlaylist = () => {
+    const raw = (frame.dataset.playlist || "").trim();
+    if (raw) {
+      return raw
+        .split(/[\s,]+/g)
+        .map((s) => s.trim())
+        .filter(Boolean);
+    }
+    const single = (frame.dataset.videoId || "").trim();
+    return single ? [single] : [];
+  };
 
-  const base = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}`;
+  const ids = parsePlaylist();
+  if (!ids.length) return;
+
+  // De-dupe while keeping order
+  const seen = new Set();
+  const playlistIds = ids.filter((id) => {
+    if (seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  });
+
+  const firstId = playlistIds[0];
+  const base = `https://www.youtube.com/embed/${encodeURIComponent(firstId)}`;
   const isFile = window.location.protocol === "file:";
 
   const buildParams = (mute) => {
@@ -42,7 +63,9 @@ function closeModal() {
       rel: "0",
       modestbranding: "1",
       loop: "1",
-      playlist: videoId,
+      // Enables looping and also provides the queue of videos.
+      // (Even when the embed URL is /embed/<firstId>, YouTube will use this list.)
+      playlist: playlistIds.join(","),
       mute: mute ? "1" : "0",
     });
     // Ajuda alguns ambientes/hosts a não acusarem “config error”
