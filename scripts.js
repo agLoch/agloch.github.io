@@ -238,19 +238,19 @@ function showBananaIntro(){
   });
 })();
 
-// =============================
-// Link do Teams
-// =============================
-(function setupTeams(){
-  const a = qs("#teamsLink");
-  a.href = TEAMS_URL;
-  a.addEventListener("click", () => {
-    // easter egg: se o link estiver default, zoa
-    if (TEAMS_URL.includes("SEU-LINK-AQUI")) {
-      alert("⚠️ Cole o link do Teams no script.js (TEAMS_URL) ou edite o href no HTML!");
-    }
-  });
-})();
+// // =============================
+// // Link do Teams
+// // =============================
+// (function setupTeams(){
+//   const a = qs("#teamsLink");
+//   a.href = TEAMS_URL;
+//   a.addEventListener("click", () => {
+//     // easter egg: se o link estiver default, zoa
+//     if (TEAMS_URL.includes("SEU-LINK-AQUI")) {
+//       alert("⚠️ Cole o link do Teams no script.js (TEAMS_URL) ou edite o href no HTML!");
+//     }
+//   });
+// })();
 
 // =============================
 // Easter Eggs (botões)
@@ -408,3 +408,43 @@ function zapScreen(intensity=2){
     document.body.style.filter = "";
   }, 600);
 }
+
+// =============================
+// Bianco te observa: rainbow + wave (por letra)
+// =============================
+(function setupCatObserverLabelWave(){
+  const el = document.querySelector(".cat-observer-label");
+  if (!el) return;
+
+  const raw = (el.textContent || "").replace(/\s+/g, " ").trim();
+  if (!raw) return;
+
+  // Evita duplicar spans caso o script rode duas vezes.
+  if (el.dataset.waveified === "1") return;
+  el.dataset.waveified = "1";
+
+  el.classList.add("rainbow-wave");
+  el.setAttribute("aria-label", raw);
+
+  el.textContent = "";
+  const frag = document.createDocumentFragment();
+
+  let letterIndex = 0;
+  for (const ch of raw) {
+    const span = document.createElement("span");
+    span.className = "cat-letter";
+    span.style.setProperty("--i", String(letterIndex));
+    span.setAttribute("aria-hidden", "true");
+
+    if (ch === " ") {
+      span.innerHTML = "&nbsp;";
+    } else {
+      span.textContent = ch;
+    }
+
+    frag.appendChild(span);
+    letterIndex++;
+  }
+
+  el.appendChild(frag);
+})();
